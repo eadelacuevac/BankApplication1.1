@@ -1,0 +1,98 @@
+{
+    "info": {
+        "name": "BankApplication - Microservices",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Crear Cliente",
+            "request": {
+                "method": "POST",
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "url": {"raw": "http://localhost:8001/api/clients", "protocol": "http", "host": ["localhost"], "port": "8001", "path": ["api", "clients"]},
+                "body": {"mode": "raw", "raw": "{\n    \"dni\": \"1700000000\",\n    \"name\": \"Jose Lema\",\n    \"password\": \"1234\",\n    \"gender\": \"M\",\n    \"age\": 30,\n    \"address\": \"palenque y saraguro\",\n    \"phone\": \"098254785\",\n    \"isActive\": true\n}"}
+            }
+        },
+        {
+            "name": "2. Crear Cuenta",
+            "request": {
+                "method": "POST",
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "url": {"raw": "http://localhost:8000/api/accounts", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["api", "accounts"]},
+                "body": {"mode": "raw", "raw": "{\n    \"number\": \"478758\",\n    \"type\": \"Ahorro\",\n    \"initialAmount\": 2000.0,\n    \"isActive\": true,\n    \"clientId\": 1\n}"}
+            }
+        },
+        {
+            "name": "3. Realizar Transacción",
+            "request": {
+                "method": "POST",
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "url": {"raw": "http://localhost:8000/api/transactions", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["api", "transactions"]},
+                "body": {"mode": "raw", "raw": "{\n    \"type\": \"Retiro\",\n    \"amount\": -500.0,\n    \"accountId\": 1\n}"}
+            }
+        },
+        {
+            "name": "4. Reporte Estado de Cuenta",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8000/api/transactions/clients/1/report?dateTransactionStart=2026-06-01&dateTransactionEnd=2026-06-30",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "8000",
+                    "path": ["api", "transactions", "clients", "1", "report"],
+                    "query": [
+                        {"key": "dateTransactionStart", "value": "2026-06-01"},
+                        {"key": "dateTransactionEnd", "value": "2026-06-30"}
+                    ]
+                }
+            }
+        },
+        {
+            "name": "5. Listar Clientes",
+            "request": {
+                "method": "GET",
+                "url": {"raw": "http://localhost:8001/api/clients", "protocol": "http", "host": ["localhost"], "port": "8001", "path": ["api", "clients"]}
+            }
+        },
+        {
+            "name": "6. Actualizar Cliente (PUT)",
+            "request": {
+                "method": "PUT",
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "url": {"raw": "http://localhost:8001/api/clients/1", "protocol": "http", "host": ["localhost"], "port": "8001", "path": ["api", "clients", "1"]},
+                "body": {"mode": "raw", "raw": "{\n    \"name\": \"Jose Lema Actualizado\",\n    \"address\": \"Nueva dirección 123\"\n}"}
+            }
+        },
+        {
+            "name": "7. Listar Cuentas",
+            "request": {
+                "method": "GET",
+                "url": {"raw": "http://localhost:8000/api/accounts", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["api", "accounts"]}
+            }
+        },
+        {
+            "name": "8. Eliminar Cliente",
+            "request": {
+                "method": "DELETE",
+                "url": {"raw": "http://localhost:8001/api/clients/1", "protocol": "http", "host": ["localhost"], "port": "8001", "path": ["api", "clients", "1"]}
+            }
+        },
+        {
+            "name": "9. Eliminar Cuenta",
+            "request": {
+                "method": "DELETE",
+                "url": {"raw": "http://localhost:8000/api/accounts/1", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["api", "accounts", "1"]}
+            }
+        },
+        {
+            "name": "10. Actualizar Parcialmente Cliente (PATCH)",
+            "request": {
+                "method": "PATCH",
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "url": {"raw": "http://localhost:8001/api/clients/1", "protocol": "http", "host": ["localhost"], "port": "8001", "path": ["api", "clients", "1"]},
+                "body": {"mode": "raw", "raw": "{\n    \"address\": \"solo dirección actualizada  con PATCH\"\n}"}
+            }
+        }
+    ]
+}
